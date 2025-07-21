@@ -1,5 +1,19 @@
+# Godot 自動生成的資源快取
 .import/
-.godot/
-export.cfg
-export_presets.cfg
 *.import
+
+# Godot 4 編輯器內部快取資料夾（scene tabs、視窗位置等）
+.godot/
+
+# 本地匯出記錄
+export.cfg
+
+# 匯出設定：建議保留以供團隊使用
+# export_presets.cfg（不忽略）
+
+# 翻譯檔案編譯結果（如非手寫，則可忽略）
+*.translation
+
+# OS 額外雜檔
+.DS_Store
+Thumbs.db

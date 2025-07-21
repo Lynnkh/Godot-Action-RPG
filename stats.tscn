@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6d5lvic8uw0h"]
+
+[ext_resource type="Script" path="res://Stats.gd" id="1_m80pr"]
+
+[node name="Stats" type="Node"]
+script = ExtResource("1_m80pr")
+
+[connection signal="no_health" from="." to="." method="_on_no_health"]

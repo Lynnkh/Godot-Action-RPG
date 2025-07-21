@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
 #最大速度
-const MAX_SPEED = 80
+@export var MAX_SPEED = 80
 #加速度
-const ACCELERATION = 500
+@export var ACCELERATION = 500
 #翻滾速度
-const ROLL_SPEED = 125
+@export var ROLL_SPEED = 125
 #摩擦力
-const FRICTION = 500
+@export var FRICTION = 500
 
 #狀態機常數
 enum {
