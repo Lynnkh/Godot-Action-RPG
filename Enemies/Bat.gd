@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+#EnemeyDeathEffect 是 場景.tsch
+#集中加載資源
+const EnemeyDeathEffect = preload("res://Effects/enemy_death_effect.tscn")
+
 #拿取節點Node
 @onready var stats = $Stats
 
@@ -18,3 +22,11 @@ func _on_hurt_box_area_entered(area):
 #連接信號
 func _on_stats_no_health():
 	queue_free()
+	
+	#enemeyDeathEffect 是 Node
+	var enemeyDeathEffect = EnemeyDeathEffect.instantiate()
+	
+	#加入enemeyDeathEffect
+	#enemeyDeathEffect 位置是Bat位置
+	get_parent().add_child(enemeyDeathEffect)
+	enemeyDeathEffect.global_position = global_position
