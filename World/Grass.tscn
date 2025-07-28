@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cqvwyh80pfmny"]
 
 [ext_resource type="Texture2D" uid="uid://d02air7lc7oql" path="res://World/Grass.png" id="1_rojru"]
-[ext_resource type="Script" path="res://World/Grass.gd" id="2_nq4h2"]
+[ext_resource type="Script" uid="uid://bcgvbg8yd8u0l" path="res://World/Grass.gd" id="2_nq4h2"]
 [ext_resource type="PackedScene" uid="uid://dog76awihrn7x" path="res://Overlap/hurt_box.tscn" id="3_nkht2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkvkq"]
