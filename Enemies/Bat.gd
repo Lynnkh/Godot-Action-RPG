@@ -45,9 +45,7 @@ func _physics_process(delta):
 	
 	move_and_slide()
 			
-"""
-判斷是否進入範圍，如果是state為CHASE，不是則不發生。
-"""
+## 判斷是否進入範圍，如果是則將狀態設為 CHASE。
 func seek_player():
 	if playerDetectionZone.can_seek_player():
 		state = BATSTATE.State.CHASE
