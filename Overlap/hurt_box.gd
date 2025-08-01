@@ -1,12 +1,41 @@
 extends Area2D
 
-@export var show_hit = true
-
 const HitEffect = preload("res://Effects/hit_effect.tscn")
 
-func _on_area_entered(area):
-	if show_hit == true:
-		var effect= HitEffect.instantiate()
-		var main = get_tree().current_scene
-		main.add_child(effect)
-		effect.global_position = global_position
+@onready var timer = $Timer
+
+##無敵變量
+var invincible:bool = false:set = set_invincible
+
+signal invincibility_started
+signal invincibility_ended
+
+##set函數
+func set_invincible(value):
+	invincible = value
+	if invincible ==true:
+		emit_signal("invincibility_started")
+	else:
+		emit_signal("invincibility_ended")
+
+func create_hit_effect():
+	var effect= HitEffect.instantiate()
+	var main = get_tree().current_scene
+	main.add_child(effect)
+	effect.global_position = global_position
+
+##設置無敵狀態
+func start_invincibility(duration):
+	self.invincible = true
+	timer.start(duration)
+
+##時間到呼叫set函數 set_invincible
+func _on_timer_timeout() -> void:
+	self.invincible = false
+
+
+func _on_invincibility_started() -> void:
+	set_deferred("monitoring",false)
+	
+func _on_invincibility_ended() -> void:
+	set_deferred("monitoring",true)

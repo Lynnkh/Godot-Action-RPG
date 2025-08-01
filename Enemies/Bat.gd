@@ -18,6 +18,7 @@ var state = BATSTATE.State.IDLE
 @onready var stats = $Stats
 @onready var playerDetectionZone = $PlayerDetectionZone
 @onready var sprite = $AnimationSprite2D
+@onready var hurtBox = $HurtBox
 
 func _physics_process(delta):
 	#擊退移動距離
@@ -56,6 +57,7 @@ func _on_hurt_box_area_entered(area):
 	stats.health -= area.damage
 	#被攻擊的移動距離
 	velocity = area.knockback_vector * 120
+	hurtBox.create_hit_effect()
 	
 #連接信號
 func _on_stats_no_health():

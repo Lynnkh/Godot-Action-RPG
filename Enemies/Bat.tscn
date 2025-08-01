@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkp68eu8mlvy"]
+[gd_scene load_steps=18 format=3 uid="uid://dkp68eu8mlvy"]
 
 [ext_resource type="Script" uid="uid://cidtk0wuop31l" path="res://Enemies/Bat.gd" id="1_35xwv"]
 [ext_resource type="Texture2D" uid="uid://b54ap3srnpr44" path="res://Enemies/Bat.png" id="1_pjxsn"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dog76awihrn7x" path="res://Overlap/hurt_box.tscn" id="3_r4ogl"]
 [ext_resource type="PackedScene" uid="uid://b6d5lvic8uw0h" path="res://stats.tscn" id="5_nwy5c"]
 [ext_resource type="PackedScene" uid="uid://b60nn2tis5v1s" path="res://Enemies/player_detection_zone.tscn" id="6_5xogs"]
+[ext_resource type="PackedScene" uid="uid://bgcratw5k14oq" path="res://Overlap/hit_box.tscn" id="7_t8weg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ouur"]
 atlas = ExtResource("1_pjxsn")
@@ -60,15 +61,20 @@ height = 20.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t8weg"]
 radius = 32.0624
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mwqcb"]
+radius = 5.09902
+
 [node name="Bat" type="CharacterBody2D"]
-collision_mask = 16
+collision_layer = 0
+collision_mask = 17
 script = ExtResource("1_35xwv")
 
 [node name="AnimationSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_88t8o")
 animation = &"Fly"
 autoplay = "Fly"
-frame_progress = 0.117366
+frame = 3
+frame_progress = 0.10337
 offset = Vector2(0, -12)
 
 [node name="ShdowSprite2D" type="Sprite2D" parent="."]
@@ -94,8 +100,16 @@ max_health = 2
 modulate = Color(1, 1, 1, 0.301961)
 shape = SubResource("CircleShape2D_t8weg")
 
+[node name="HitBox" parent="." instance=ExtResource("7_t8weg")]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_mwqcb")
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
 
 [editable path="HurtBox"]
 [editable path="PlayerDetectionZone"]
+[editable path="HitBox"]

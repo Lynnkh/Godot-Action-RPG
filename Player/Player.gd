@@ -19,15 +19,19 @@ enum {
 #狀態機變數
 var state = MOVE
 var roll_vector = Vector2.DOWN
+## PlayStats全局變數是"res://Player/play_stats.tscn"
+var stats = PlayStats
 
 #拿取節點Node
 @onready var animationPlayer = $AnimationPlayer
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree.get('parameters/playback')
 @onready var swordHitBox = $HitBoxPivot/SwordHitBox
+@onready var hurtBox = $HurtBox
 
 func _ready():
-		swordHitBox.knockback_vector = roll_vector
+	stats.no_health.connect(func(): queue_free())
+	swordHitBox.knockback_vector = roll_vector
 
 func _process(delta):
 	match state:
@@ -102,3 +106,8 @@ func roll_animation_finished() :
 #動畫軌:攻擊呼叫方法
 func attack_animation_finished() :
 	state = MOVE
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	stats.health -= 1
+	hurtBox.start_invincibility(0.5)
+	hurtBox.create_hit_effect()
