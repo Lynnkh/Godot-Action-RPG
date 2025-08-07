@@ -4,7 +4,7 @@ extends CharacterBody2D
 #集中加載資源
 const EnemeyDeathEffect = preload("res://Effects/enemy_death_effect.tscn")
 
-@export var ACCELRATION = 250
+@export var ACCELRATION = 218
 @export var MAX_SPEED = 50
 @export var FRICTION = 200
 
@@ -14,11 +14,12 @@ var BATSTATE = preload("res://Enemies/EnemieState.gd")
 #狀態
 var state = BATSTATE.State.IDLE
 
-#拿取節點Node
+#拿取子節點Node
 @onready var stats = $Stats
 @onready var playerDetectionZone = $PlayerDetectionZone
 @onready var sprite = $AnimationSprite2D
 @onready var hurtBox = $HurtBox
+@onready var softCollision = $SoftCollision
 
 func _physics_process(delta):
 	#擊退移動距離
@@ -44,6 +45,10 @@ func _physics_process(delta):
 			#翻轉動畫
 			sprite.flip_h = velocity.x < 0
 	
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 400
+	
+	#更新速度
 	move_and_slide()
 			
 ## 判斷是否進入範圍，如果是則將狀態設為 CHASE。

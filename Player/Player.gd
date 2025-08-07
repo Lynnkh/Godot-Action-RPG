@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #最大速度
-@export var MAX_SPEED = 80
+@export var MAX_SPEED = 90
 #加速度
 @export var ACCELERATION = 500
 #翻滾速度
