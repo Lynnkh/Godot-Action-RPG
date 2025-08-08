@@ -33,7 +33,7 @@ func _ready():
 	stats.no_health.connect(func(): queue_free())
 	swordHitBox.knockback_vector = roll_vector
 
-func _process(delta):
+func _physics_process(delta):
 	match state:
 		MOVE:
 			move_state(delta)
