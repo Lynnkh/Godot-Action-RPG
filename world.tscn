@@ -830,13 +830,13 @@ position = Vector2(44, 124)
 position = Vector2(235, 28)
 
 [node name="Bat" parent="." instance=ExtResource("7_1lwsj")]
-position = Vector2(136, 64)
+position = Vector2(54, 54)
 
 [node name="Bat2" parent="." instance=ExtResource("7_1lwsj")]
-position = Vector2(120, 120)
+position = Vector2(49, 150)
 
 [node name="Bat3" parent="." instance=ExtResource("7_1lwsj")]
-position = Vector2(208, 56)
+position = Vector2(264, 83)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
