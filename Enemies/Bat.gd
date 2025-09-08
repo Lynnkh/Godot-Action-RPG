@@ -1,18 +1,22 @@
 extends CharacterBody2D
 
-# EnemeyDeathEffect 是 場景.tsch
-# 集中加載資源
+## EnemeyDeathEffect場景
 const EnemeyDeathEffect = preload("res://Effects/enemy_death_effect.tscn")
+## 預載入State class
+var BATSTATE = preload("res://Enemies/EnemieState.gd")
 
+## 加速度
 @export var ACCELRATION = 235
+## 最大速度
 @export var MAX_SPEED = 50
+## 摩擦力
 @export var FRICTION = 180
+## 距離怪物終點位置範圍
 @export var WANDER_TARGET_RANGE = 3
 
+## 角色的速度向量
 var speed = Vector2.ZERO
-# 預載入State class
-var BATSTATE = preload("res://Enemies/EnemieState.gd")
-# 狀態
+## 狀態
 var state = BATSTATE.State.IDLE
 
 # 拿取子節點Node
@@ -26,7 +30,6 @@ var state = BATSTATE.State.IDLE
 func _ready() -> void:
 	# 隨機選擇狀態
 	state = pick_random_state([BATSTATE.State.IDLE,BATSTATE.State.WANDER])
-
 
 func _physics_process(delta):
 	# 擊退移動距離
@@ -62,7 +65,7 @@ func _physics_process(delta):
 		BATSTATE.State.CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
-				accelerate_towards_point(global_position,delta)
+				accelerate_towards_point(player.global_position,delta)
 			else:
 				state = BATSTATE.State.IDLE
 
