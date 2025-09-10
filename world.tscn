@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://blmlch6mxfch8"]
+[gd_scene load_steps=15 format=3 uid="uid://blmlch6mxfch8"]
 
+[ext_resource type="PackedScene" uid="uid://btfclcp665ssa" path="res://camera_2d.tscn" id="1_wse8f"]
 [ext_resource type="PackedScene" uid="uid://c5tsj7p0ab65q" path="res://Player/player.tscn" id="2_2qflx"]
 [ext_resource type="PackedScene" uid="uid://b5vux62tucc82" path="res://World/Bush.tscn" id="2_g7cgm"]
 [ext_resource type="Texture2D" uid="uid://w6scmge0d0bq" path="res://World/DirtTileset.png" id="3_5vn5c"]
@@ -736,14 +737,8 @@ sources/0 = SubResource("TileSetAtlasSource_yna4v")
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" parent="." instance=ExtResource("1_wse8f")]
 position = Vector2(167, 83)
-process_callback = 0
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 60.0
-rotation_smoothing_enabled = true
-rotation_smoothing_speed = 60.0
 
 [node name="Player" parent="." instance=ExtResource("2_2qflx")]
 position = Vector2(167, 83)
@@ -843,3 +838,5 @@ position = Vector2(264, 83)
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource("8_gbfbk")]
 offset_left = 5.0
 offset_right = 93.0
+
+[editable path="Camera2D"]
