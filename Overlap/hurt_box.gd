@@ -24,18 +24,18 @@ func create_hit_effect():
 	main.add_child(effect)
 	effect.global_position = global_position
 
-##設置無敵狀態
+## 設置無敵狀態
 func start_invincibility(duration):
 	self.invincible = true
 	timer.start(duration)
 
-##時間到呼叫set函數 set_invincible
+## 時間到呼叫set函數 set_invincible
 func _on_timer_timeout() -> void:
 	self.invincible = false
 
 
 func _on_invincibility_started() -> void:
 	set_deferred("monitoring",false)
-	
+
 func _on_invincibility_ended() -> void:
 	set_deferred("monitoring",true)

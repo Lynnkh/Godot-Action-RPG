@@ -26,6 +26,7 @@ var state = BATSTATE.State.IDLE
 @onready var hurtBox = $HurtBox
 @onready var softCollision = $SoftCollision
 @onready var wanderController = $WanderController
+@onready var animationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	# 隨機選擇狀態
@@ -106,7 +107,8 @@ func _on_hurt_box_area_entered(area) ->void:
 	# 被攻擊的移動距離
 	velocity = area.knockback_vector * 120
 	hurtBox.create_hit_effect()
-	
+	hurtBox.start_invincibility(0.4)
+		
 func _on_stats_no_health() -> void:
 	queue_free()
 	
@@ -117,3 +119,11 @@ func _on_stats_no_health() -> void:
 	# enemeyDeathEffect 位置是Bat位置
 	get_parent().add_child(enemeyDeathEffect)
 	enemeyDeathEffect.global_position = global_position
+
+
+func _on_hurt_box_invincibility_ended() -> void:
+	animationPlayer.play("Stop")
+
+
+func _on_hurt_box_invincibility_started() -> void:
+	animationPlayer.play("Start")

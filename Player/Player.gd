@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+## PlayerHurtSound場景
+const PlayerHurtSound = preload("res://Player/player_hurt_sound.tscn")
+
 ## 最大速度
 @export var MAX_SPEED = 90
 ## 加速度
@@ -28,6 +31,7 @@ var stats = PlayStats
 @onready var animationState = animationTree.get('parameters/playback')
 @onready var swordHitBox = $HitBoxPivot/SwordHitBox
 @onready var hurtBox = $HurtBox
+@onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 func _ready():
 	# 改變隨機種子，每次遊戲都會不一樣
@@ -97,20 +101,32 @@ func attack_state(delta) -> void:
 
 ## 移動函式
 func move() -> void:
-	#move_and_slide() 是「連續」移動的函式每幀都要呼叫它，否則角色會停止
+	# move_and_slide() 是「連續」移動的函式每幀都要呼叫它，否則角色會停止
 	move_and_slide()
 
-##動畫軌:翻軌呼叫方法
+## 動畫軌:翻軌呼叫方法
 func roll_animation_finished() -> void:
 	velocity = Vector2.ZERO
 	state = MOVE
 
-##動畫軌:攻擊呼叫方法
+## 動畫軌:攻擊呼叫方法
 func attack_animation_finished() -> void:
 	state = MOVE
 
-##動畫軌:攻擊呼叫方法
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	stats.health -= 1
-	hurtBox.start_invincibility(0.5)
+	stats.health = stats.health + area.damage
+	hurtBox.start_invincibility(0.6)
 	hurtBox.create_hit_effect()
+	
+	## 獲取PlayerHurtSound節點
+	var playerHurtSound = PlayerHurtSound.instantiate()
+	# 添加節點
+	get_tree().current_scene.add_child(playerHurtSound)
+
+## 當HurtBox進入無敵
+func _on_hurt_box_invincibility_started() -> void:
+	blinkAnimationPlayer.play("Start")
+
+## 當HurtBox結束無敵
+func _on_hurt_box_invincibility_ended() -> void:
+	blinkAnimationPlayer.play("Stop")
