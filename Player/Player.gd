@@ -4,7 +4,7 @@ extends CharacterBody2D
 const PlayerHurtSound = preload("res://Player/player_hurt_sound.tscn")
 
 ## 最大速度
-@export var MAX_SPEED = 90
+@export var MAX_SPEED = 150
 ## 加速度
 @export var ACCELERATION = 500
 ## 翻滾速度
@@ -117,7 +117,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	stats.health = stats.health + area.damage
 	hurtBox.start_invincibility(0.6)
 	hurtBox.create_hit_effect()
-	
+		
 	## 獲取PlayerHurtSound節點
 	var playerHurtSound = PlayerHurtSound.instantiate()
 	# 添加節點

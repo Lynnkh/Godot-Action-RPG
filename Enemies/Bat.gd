@@ -8,7 +8,7 @@ var BATSTATE = preload("res://Enemies/EnemieState.gd")
 ## 加速度
 @export var ACCELRATION = 235
 ## 最大速度
-@export var MAX_SPEED = 50
+@export var MAX_SPEED = 30
 ## 摩擦力
 @export var FRICTION = 180
 ## 距離怪物終點位置範圍

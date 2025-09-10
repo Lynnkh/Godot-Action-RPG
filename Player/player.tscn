@@ -12,7 +12,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_00tjw"]
 shader = ExtResource("3_00tjw")
-shader_parameter/active = false
+shader_parameter/active = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14hgl"]
 radius = 4.0
